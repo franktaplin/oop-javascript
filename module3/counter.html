@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <h1>Counter Program</h1>
+    </header>
+    <body>
+        <h2>Current Value</h2><!-- create heading for current value box -->
+        <h1 class="counter-display">(..)</h1><!-- create class with null html value -->
+        <button class="counter-minus">-</button><!-- create minus button -->
+        <button class="counter-plus">+</button><!-- create plus button -->
+        <h2>Total Clicks</h2><!-- create heading for total clicks box -->
+        <h1 class="total-counter">(..)</h1><!-- create class with null html value -->
+
+        <script>
+            let counterDisplayElem = document.querySelector('.counter-display'); // create variable to show current value
+            let counterMinusElem = document.querySelector('.counter-minus'); // create variable for clicking on minus button
+            let counterPlusElem = document.querySelector('.counter-plus'); // create variable for clicking on plus button
+            let counterTotalElem = document.querySelector('.total-counter'); // create variable to show total number of clicks
+
+            let count = 0; // set initial counter value to 0
+            let totalCount = 0; // set total click value to 0
+
+            updateDisplay(); // run function to show initial display
+
+            counterPlusElem.addEventListener("click",()=>{
+                count++; //increase counter value by 1
+                totalCount++; // increase total click value by 1
+                updateDisplay(); // run function to display new totals
+            }); // define what happens when plus button is clicked
+
+            counterMinusElem.addEventListener("click",()=>{
+                count--; // decrease counter value by 1
+                totalCount++; // increase total click value by 1
+                updateDisplay();
+            }); // define what happens when minus button is clicked
+
+            function updateDisplay(){
+                counterDisplayElem.innerHTML = count; // set the displayed value to the current value
+                counterTotalElem.innerHTML = totalCount; // set the displayed value to the total number of clicks
+            }; // function that is run to update the current value and the total value
+        </script>
+    </body>
+</html>
