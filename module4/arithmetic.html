@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <h1>Arithmetic Problem</h1>
+    </header>
+
+    <body>
+        <!-- create boxes to imput 2 numbers and buttons which indicate which operation to perform -->
+        <p>Please Enter a Number: <input type = "text" id = "firstNumber"></p>
+        <p>Please Enter a Second Number: <input type = "text" id = "secondNumber"></p>
+        <p>Please Choose Which Operation You Would Like to do:</p>
+        <input type="button" onclick = "AddBy()" value = "+"></button>
+        <input type="button" onclick = "SubtractBy()" value = "-"></button>
+        <input type="button" onclick = "MultiplyBy()" value = "*"></button>
+        <input type="button" onclick = "DivideBy()" value = "/"></button>
+        
+
+        <script>
+            //functions
+            function AddBy() {
+                firstNum = Number(document.getElementById("firstNumber").value);// convert 1st number to number type
+                secondNum = Number(document.getElementById("secondNumber").value);// convert 2nd number to number type
+                document.getElementById("total").innerHTML = firstNum + secondNum;// add numbers
+            }
+            function SubtractBy() {
+                firstNum = Number(document.getElementById("firstNumber").value);// convert 1st number to number type
+                secondNum = Number(document.getElementById("secondNumber").value);// convert 2nd number to number type
+                document.getElementById("total").innerHTML = firstNum - secondNum;// subtract numbers
+            }
+            function MultiplyBy() {
+                firstNum = Number(document.getElementById("firstNumber").value);// convert 1st number to number type
+                secondNum = Number(document.getElementById("secondNumber").value);// convert 2nd number to number type
+                document.getElementById("total").innerHTML = firstNum * secondNum;// multiply numbers
+            }
+            function DivideBy() {
+                firstNum = Number(document.getElementById("firstNumber").value);// convert 1st number to number type
+                secondNum = Number(document.getElementById("secondNumber").value);// convert 2nd number to number type
+                document.getElementById("total").innerHTML = firstNum / secondNum;// divide numbers
+            }
+        </script>
+        <p>The Result is: <span id="total"></span></p> <!-- display the result -->
+
+    </body>
+</html>
