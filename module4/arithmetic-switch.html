@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <h1>Arithmetic Problem</h1>
+    </header>
+
+    <body>
+        <!-- create boxes to imput 2 numbers and buttons which indicate which operation to perform -->
+        <p>Please Enter a Number: <input type = "text" id = "firstNumber"></p>
+        <p>Please Enter a Second Number: <input type = "text" id = "secondNumber"></p>
+        <p>Please Choose Which Operation You Would Like to do:</p>
+        <input type = "button" onclick = "Operation(this.id)" value = "+" id = "add"></button>
+        <input type = "button" onclick = "Operation(this.id)" value = "-" id = "subtract"></button>
+        <input type = "button" onclick = "Operation(this.id)" value = "*" id = "multiply"></button>
+        <input type = "button" onclick = "Operation(this.id)" value = "/" id = "divide"></button>
+        
+
+        <script>
+            //function
+            function Operation(id) {
+                firstNum = Number(document.getElementById("firstNumber").value);// convert 1st number from string to number type
+                secondNum = Number(document.getElementById("secondNumber").value);// convert 2nd number from string to number type
+                // switch to perform correct operation based on which button is pressed
+                switch(id) {
+                    case "add":
+                        document.getElementById("total").innerHTML = firstNum + secondNum;// add number
+                        break;
+                    case "subtract":
+                        document.getElementById("total").innerHTML = firstNum - secondNum;// subtract numbers
+                        break;
+                    case "multiply":
+                        document.getElementById("total").innerHTML = firstNum * secondNum;// multiply numbers
+                        break;
+                    case "divide":
+                        document.getElementById("total").innerHTML = firstNum / secondNum;// divide numbers
+                        break;
+
+                }
+                    
+            }
+            
+        </script>
+        <p>The Result is: <span id="total"></span></p> <!-- display the result -->
+
+    </body>
+</html>
