@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    
+    <body>
+        <script>
+            // create array
+            const avengers = [ 
+            { 
+                name: "Iron Man", 
+                alter_ego: "Tony Stark", 
+                primary_power: "Powered Armor", 
+                universe: "Marvel Cinematic Universe",
+                age: 48 
+            },
+            {
+                name: "Captain America", 
+                alter_ego: "Steve Rogers", 
+                primary_power: "Super Soldier Serum", 
+                universe: "Marvel Cinematic Universe",
+                age: 105 
+            }, 
+            { 
+                name: "Thor", 
+                alter_ego: "Thor Odinson",
+                primary_power: "Super Strength", 
+                universe: "Marvel Cinematic Universe", 
+                age: 1500 
+            },
+            {
+                name: "The Hulk", 
+                alter_ego: "Bruce Banner",
+                primary_power: "Super Strength",
+                universe: "Marvel Cinematic Universe",
+                age: 49 
+            },
+            { 
+                name: "Black Widow",
+                alter_ego: "Natasha Romanoff",
+                primary_power: "Expert Spy and Assassin",
+                universe: "Marvel Cinematic Universe",
+                age: 37
+            },
+            {
+                name: "Hawkeye", 
+                alter_ego: "Clint Barton",
+                primary_power: "Expert Marksman",
+                universe: "Marvel Cinematic Universe",
+                age: 51
+            }
+            ];
+           
+            console.log("Names of the Avengers");// title for list of names
+            for (let avenger of avengers) {
+                console.log(avenger.name);
+            } // for loop that lists the names of the avengers
+            
+            console.log("");
+            console.log("Avengers that have Super Strength");// title for list of avengers with super strength
+            for (let avenger of avengers) {
+                if (avenger.primary_power == "Super Strength") {
+                    console.log(avenger.name);
+                }
+            }; // for loop thatwith embedded if statement to only display names of avengers that have super strength
+
+            console.log("");
+            console.log("Avengers that are older than 50"); // title for list of avengers older than 50 along with their ages
+                for (let avenger of avengers) {
+                if (avenger.age >= 50) {
+                    console.log(avenger.name, avenger.age);
+                }
+            } // for loop with embedded if statement that will display the names of the avengerws older than 50 and their age
+        </script>
+        
+        
+    </body>
+</html>
