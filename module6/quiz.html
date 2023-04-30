@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <h1>Quiz Project</h1>
+    </header>
+    <body>
+        <div id="quiz"></div>
+        <button id="submit">Submit Quiz</button>
+        <div id="results"></div>
+
+        <script>
+            // function to create quiz
+            function buildQuiz(){
+                // variable to store HTML output
+                const output = [];
+                // block of code to run for each question
+                myQuestions.forEach(
+                    (currentQuestion, questionNumber) => {
+                        // variable to store possible answers
+                        const answers = [];
+                        // for loop to add buttons for each answer
+                        for(letter in currentQuestion.answers){
+                            answers.push(
+                                `<label>
+                                    <input type="radio" name="question${questionNumber}" value="${letter}">
+                                    ${letter} : ${currentQuestion.answers[letter]}
+                                </label>`
+                            );
+                        }
+                        // add question to output
+                        output.push(
+                                `<div class="question"> ${currentQuestion.question} </div>
+                                <div class="answers"> ${answers.join('')} </div>`
+                        );
+
+                    }
+                );
+                // combine output list in string for output
+                quizContainer.innerHTML = output.join('');
+            }
+            // function to show results
+            function showResults(){
+                // answer container for quiz
+                const answerContainers = quizContainer.querySelectorAll('.answers');
+                // initialize variable for number of correct answers
+                let numCorrect = 0;
+                // block of code to run for each answer
+                myQuestions.forEach( (currentQuestion, questionNumber) => {
+                    const answerContainer =answerContainers[questionNumber];
+                    const selector = `input[name=question${questionNumber}]:checked`;
+                    const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+                    // if statement to check for correct answer
+                    if(userAnswer === currentQuestion.correctAnswer){
+                        // if answer is correct increase number of correct answers and color line blue
+                        numCorrect++;
+                        answerContainers[questionNumber].style.color = 'blue';
+                    }
+                    else{
+                        // if answer is incorrect color line red
+                        answerContainers[questionNumber].style.color = 'red';
+                    }
+                });
+                // display total number of correct answers
+                resultsContainer.innerHTML = `You got ${numCorrect} out of ${myQuestions.length} correct`;
+            }
+            // create variables
+            const quizContainer = document.getElementById('quiz');
+            const resultsContainer = document.getElementById('results');
+            const submitButton = document.getElementById('submit');
+            // create questions and answers
+            const myQuestions = [
+                { question: "What year was Star Wars first shown in the theaters?",
+                  answers: {
+                    a: "1985",
+                    b: "1977",
+                    c: "2015",
+                    d: "1998"
+                  },
+                  correctAnswer: "b"
+                },
+                { question: "What is the name of Han Solo's ship?",
+                  answers: {
+                    a: "USS Enterprise",
+                    b: "Serenity",
+                    c: "Millenium Falcon",
+                    d: "Galactica"
+                  },
+                  correctAnswer: "c"
+                },
+                { question: "What is the name of the child on the Mandalorian?",
+                  answers: {
+                    a: "Baby Yoda",
+                    b: "Yaddle",
+                    c: "Yoda Jr.",
+                    d: " Din Grogu"
+                  },
+                  correctAnswer: "d"
+                },
+                { question: "What weapon does a Jedi use?",
+                  answers: {
+                    a: "phaser",
+                    b: "lightsaber",
+                    c: "laser sword",
+                    d: "blaster"
+                  },
+                  correctAnswer: "b"
+                },
+                { question: "What kind of ship does Luke Skywalker fly?",
+                  answers: {
+                    a: "X wing",
+                    b: "F-14 Tomcat",
+                    c: "TIE fighter",
+                    d: "Viper"
+                  },
+                  correctAnswer: "a"
+                }
+            ];
+            
+            // function call to run quiz
+            buildQuiz();
+            // show results when clicked
+            submitButton.addEventListener('click', showResults);
+
+        </script>
+    </body>
+</html>
