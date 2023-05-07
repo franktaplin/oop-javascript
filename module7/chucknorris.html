@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <h1>Random Chuck Norris joke</h1>
+    </header>
+    <body>
+        <input type = "button" onclick = "GetJoke()" value = "Press this button to get a random Chuck Norris joke"></button>
+       
+        <script>
+            async function GetJoke() {
+                const response = await fetch("https://api.chucknorris.io/jokes/random");
+                const jsonData = await response.json();
+                
+                alert(jsonData.value);
+            }          
+        </script>
+
+    </body>
+</html>
