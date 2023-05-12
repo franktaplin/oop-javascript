@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: orangered;
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+            }
+
+            .card {
+                list-style: none;
+                padding: 40px;
+                background-color:white;
+                color: black;
+                text-align: center;
+                border-radius: 12px;
+            }
+
+            .card:hover {
+                animation: bounce 0.5s linear;
+                cursor: pointer;
+            }
+
+            @keyframes bounce {
+                20% {
+                    transform: translateY(-6px);
+                }
+                40% {
+                    transform: translateY(0px);
+                }
+                60% {
+                    transform: translateY(-2px);
+                }
+                80% {
+                    transform: translateY(-0px);
+                }
+            }
+
+            .card-title {
+                text-transform: uppercase;
+                font-size: 32px;
+                font-weight: normal;
+                margin-bottom: 0;
+            }
+
+            .card-subtitle {
+                font-weight: lighter;
+                color: gray;
+                margin-top: 5px;
+            }
+
+            .card-image {
+                height: 120px;
+            }
+
+            #pokedex {
+                padding-inline-start: 0;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                grid-gap: 20px;
+            }
+
+            .container {
+                padding: 40px;
+                margin: 0 auto;
+            }
+
+            h1 {
+                text-transform: uppercase;
+                text-align: center;
+                font-size: 54px;
+                color: yellow;
+                -webkit-text-stroke: blue 4px;
+            }
+
+            .popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100vw;
+                background: white;
+                opacity: 0.95;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #closeBtn {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: orangered;
+                padding: 10px 20px;
+                border: none;
+                color: white;
+                border-radius: 3px;
+                transition: transform 100ms;
+            }
+
+            button:hover {
+                cursor: pointer;
+                transform: translateY(-1px);
+                box-shadow: 0px 1px 2px darkred;
+            }
+        </style>
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            <h1>Gen 1 Pokemon Pokedex</h1>
+            <ol id="pokedex"></ol>
+        </div>
+        <script>
+            const pokedex = document.getElementById('pokedex');
+            async function GetNames() {
+                const url = `https://pokeapi.co/api/v2/pokemon?limit=150`;
+                const res = await fetch(url);
+                const data = await res.json();
+                const pokemon = data.results.map((data, index) => ({
+                    name: data.name,
+                    id: index + 1,
+                    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index +
+                    1}.png`
+                }));
+
+                displayPokemon(pokemon);
+            };
+
+            function displayPokemon(pokemon) {
+                const pokemonHTMLString = pokemon
+                    .map((pokeName) =>
+                        `<li class="card" onclick="selectPokemon(${pokeName.id})">
+                            <img class="card-image" src="${pokeName.image}"/>
+                            <h2 class="card-title">${pokeName.name}</h2>
+                            </a>
+                        </li>`).join('');
+
+                pokedex.innerHTML = pokemonHTMLString;
+            };
+
+            async function selectPokemon(id) {
+                const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+                const res = await fetch(url);
+                const pokeData = await res.json();
+            
+                displayPokemanPopup(pokeData);
+            };
+
+            function displayPokemanPopup(pokeData) {
+                const type = pokeData.types.map((type) => type.type.name).join(', ');
+                const htmlString = 
+                    `<div class="popup">
+                        <button id="closeBtn" onclick="closePopup()">Close</button>
+                        <div class="card">
+                            <img class="card-image" src="${
+                                pokeData.sprites['front_default']}"/>
+                            <h2 class="card-title">${pokeData.name}</h2>
+                            <p>Type: ${type} | Pokedex Number ${pokeData.id}</p>
+                        </div>
+                    </div>`;
+
+                pokedex.innerHTML = htmlString + pokedex.innerHTML;
+            };
+
+            function closePopup() {
+                const popup = document.querySelector('.popup');
+                popup.parentElement.removeChild(popup);
+            };
+
+            GetNames();
+        </script>
+    </body>
+<html>
